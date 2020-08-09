@@ -7,8 +7,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="./img/favicon.png">
-  <link rel="icon" type="image/png" href="./img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,7 +23,7 @@
 
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="./lib/hint/hint.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
 
 
-<link  rel="stylesheet" href="./css/main.css" />
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
@@ -50,7 +50,7 @@
 
 
 
-  <script  src="./js/utils.js" ></script>
+  <script  src="/js/utils.js" ></script>
 <meta name="generator" content="Hexo 4.2.1"></head>
 
 
@@ -59,7 +59,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="./">&nbsp;<strong>ljtian's blog</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>ljtian's blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -76,7 +76,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="./">
+              <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
               </a>
@@ -88,7 +88,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="./archives/">
+              <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
                 归档
               </a>
@@ -100,7 +100,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="./categories/">
+              <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
                 分类
               </a>
@@ -112,7 +112,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="./tags/">
+              <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
                 标签
               </a>
@@ -124,7 +124,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="./about/">
+              <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
                 关于
               </a>
@@ -143,7 +143,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('./img/default.png') no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -209,14 +209,14 @@
             
             <article class="markdown-body">
               <h2 id="什么是Spring"><a href="#什么是Spring" class="headerlink" title="什么是Spring"></a>什么是Spring</h2><p>Spring 是一个轻量级Java开发开源框架，是为了解决企业级应用开发的复杂性而创建的，简化开发过程。Spring是⼀个轻量级的控制反转（IoC）和⾯向切⾯（AOP）的容器框架。</p>
-<h2 id="Spring体系结构"><a href="#Spring体系结构" class="headerlink" title="Spring体系结构"></a>Spring体系结构</h2><p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809173931.png" srcset="./img/loading.gif" alt></p>
+<h2 id="Spring体系结构"><a href="#Spring体系结构" class="headerlink" title="Spring体系结构"></a>Spring体系结构</h2><p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809173931.png" srcset="/img/loading.gif" alt></p>
 <h2 id="IOC和DI"><a href="#IOC和DI" class="headerlink" title="IOC和DI"></a>IOC和DI</h2><h3 id="IOC：控制反转"><a href="#IOC：控制反转" class="headerlink" title="IOC：控制反转"></a>IOC：控制反转</h3><p>控制反转即控制权的转移，是Spring框架的核心，用来消减程序的耦合问题。</p>
 <p>在传统开发模式下，调用者通过“new 被调用者”的方式创建对象。这种方式增加调用者和被调用者之间的耦合性，不利于后期维护。</p>
 <p>使用Spring后，对象的创建由Spring容器完成，Spring容器负责控制程序间的关系，使得控制权由调用者转移到Spring容器，控制器发生了反转。</p>
 <p>举例加深理解：我想吃面包。当某个Java对象（调用者：我），调用另一个Java对象（被调用者：面包）时，在传统编程模式下：使用new方法（自己制作面包）；使用Spring：对象的实例（面包）由Spring容器（面包店）创建，Spring容器负责控制程序间的关系（面包店负责我与面包之间的关系）。</p>
 <h3 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h3><p>Spring容器中，管理一系列的类，但调用者需要调用时，Spring容器负责将依赖对象赋值给调用者的成员变量，为调用者注入所依赖的实例。</p>
 <p>举例：面包店给我需要的菠萝包。</p>
-<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174012.png" srcset="./img/loading.gif" alt></p>
+<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174012.png" srcset="/img/loading.gif" alt></p>
 <p>综上所述，控制反转是一种通过描述（XML或者注解）并通过第三方产生或获取特定对象的方式。在Spring中，实现控制反转的是IOC容器，实现方法是DI（构造方法注入、setter方法注入、接口注入）。</p>
 <h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><h3 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h3><ol>
 <li>AOP即面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。</li>
@@ -228,7 +228,7 @@
 </ol>
 <p>将公共的业务 (日志 , 安全等) 和领域业务结合起来 , 当执行领域业务时 , 将会把公共业务加进来 。实现公共业务的重复利用，领域业务更纯粹 ，其本质还是动态代理。</p>
 <h3 id="AOP在Spring中的作用"><a href="#AOP在Spring中的作用" class="headerlink" title="AOP在Spring中的作用"></a>AOP在Spring中的作用</h3><p>提供声明式事务；允许用户自定义切面</p>
-<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174228.png" srcset="./img/loading.gif" alt></p>
+<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174228.png" srcset="/img/loading.gif" alt></p>
 <p>常用术语：</p>
 <ul>
 <li>切面（ASPECT）：横切关注点被模块化的特殊对象，是切⼊点pointcut和通知advice的结合。即，它是一个类。</li>
@@ -271,7 +271,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="./categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
                     
                   </div>
                 
@@ -279,7 +279,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="./tags/Spring/">Spring</a>
+                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
                     
                   </div>
                 
@@ -296,7 +296,7 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="./2020/07/29/%E6%8C%81%E7%BB%AD%E8%AE%B0%E5%BD%95%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/">
+                      <a href="/2020/07/29/%E6%8C%81%E7%BB%AD%E8%AE%B0%E5%BD%95%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/">
                         <span class="hidden-mobile">记录使用Hexo的一些坑</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -414,7 +414,7 @@
       >
         <span class="beian-police-sep">&nbsp;|&nbsp;</span>
         
-          <img src="./img/police_beian.png" srcset="./img/loading.gif" alt="police-icon" />
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
         
         <span>粤公网安备 44190002004892号</span>
       </a>
@@ -429,20 +429,20 @@
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="./js/debouncer.js" ></script>
-<script  src="./js/main.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
 
 <!-- Plugins -->
 
 
   
-    <script  src="./js/lazyload.js" ></script>
+    <script  src="/js/lazyload.js" ></script>
   
 
 
 
   <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="./js/clipboard-use.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
@@ -516,9 +516,9 @@
 
 
 
-  <script  src="./js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "./local-search.xml";
+    var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
       searchFunc(path, 'local-search-input', 'local-search-result');
