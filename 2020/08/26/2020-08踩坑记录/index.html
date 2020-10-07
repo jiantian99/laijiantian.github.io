@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="拉特">
   <meta name="keywords" content="">
-  <title>浅谈Spring - Hang in there</title>
+  <title>2020-08 踩坑记录 - Hang in there</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -156,8 +156,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-01 17:43">
-      2020年8月1日 下午
+    <time datetime="2020-08-26 23:11">
+      2020年8月26日 晚上
     </time>
   </div>
 
@@ -167,7 +167,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      402 字
     </span>
   
 
@@ -177,7 +177,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      6
        分钟
     </span>
   
@@ -208,60 +208,54 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="什么是Spring"><a href="#什么是Spring" class="headerlink" title="什么是Spring"></a>什么是Spring</h2><p>Spring 是一个轻量级Java开发开源框架，是为了解决企业级应用开发的复杂性而创建的，简化开发过程。Spring是⼀个轻量级的控制反转（IoC）和⾯向切⾯（AOP）的容器框架。</p>
-<h2 id="Spring体系结构"><a href="#Spring体系结构" class="headerlink" title="Spring体系结构"></a>Spring体系结构</h2><p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809173931.png" srcset="/img/loading.gif" alt></p>
-<h2 id="IOC和DI"><a href="#IOC和DI" class="headerlink" title="IOC和DI"></a>IOC和DI</h2><h3 id="IOC：控制反转"><a href="#IOC：控制反转" class="headerlink" title="IOC：控制反转"></a>IOC：控制反转</h3><p>控制反转即控制权的转移，是Spring框架的核心，用来消减程序的耦合问题。</p>
-<p>在传统开发模式下，调用者通过“new 被调用者”的方式创建对象。这种方式增加调用者和被调用者之间的耦合性，不利于后期维护。</p>
-<p>使用Spring后，对象的创建由Spring容器完成，Spring容器负责控制程序间的关系，使得控制权由调用者转移到Spring容器，控制器发生了反转。</p>
-<p>举例加深理解：我想吃面包。当某个Java对象（调用者：我），调用另一个Java对象（被调用者：面包）时，在传统编程模式下：使用new方法（自己制作面包）；使用Spring：对象的实例（面包）由Spring容器（面包店）创建，Spring容器负责控制程序间的关系（面包店负责我与面包之间的关系）。</p>
-<h3 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h3><p>Spring容器中，管理一系列的类，但调用者需要调用时，Spring容器负责将依赖对象赋值给调用者的成员变量，为调用者注入所依赖的实例。</p>
-<p>举例：面包店给我需要的菠萝包。</p>
-<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174012.png" srcset="/img/loading.gif" alt></p>
-<p>综上所述，控制反转是一种通过描述（XML或者注解）并通过第三方产生或获取特定对象的方式。在Spring中，实现控制反转的是IOC容器，实现方法是DI（构造方法注入、setter方法注入、接口注入）。</p>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><h3 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h3><ol>
-<li>AOP即面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。</li>
-<li>AOP是OOP（⾯向对象编程）的延续，是软件开发中的⼀个热点，也是Spring框架中的⼀个重要内<br>容，是函数式编程的⼀种衍⽣范型。</li>
-<li>利⽤AOP可以对业务逻辑的各个部分进⾏隔离，从⽽使得业务逻辑各部分之间的耦合度降低，提⾼程<br>序的可重⽤性，同时提⾼了开发的效率。</li>
-<li>AOP采取横向抽取机制，取代了传统纵向继承体系重复性代码。</li>
-<li>作用：在程序运行期间，不修改源码对已有方法进行增强；</li>
-<li>应用：事务管理、性能监视、安全检查、缓存、⽇志等。</li>
-</ol>
-<p>将公共的业务 (日志 , 安全等) 和领域业务结合起来 , 当执行领域业务时 , 将会把公共业务加进来 。实现公共业务的重复利用，领域业务更纯粹 ，其本质还是动态代理。</p>
-<h3 id="AOP在Spring中的作用"><a href="#AOP在Spring中的作用" class="headerlink" title="AOP在Spring中的作用"></a>AOP在Spring中的作用</h3><p>提供声明式事务；允许用户自定义切面</p>
-<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174228.png" srcset="/img/loading.gif" alt></p>
-<p>常用术语：</p>
-<ul>
-<li>切面（ASPECT）：横切关注点被模块化的特殊对象，是切⼊点pointcut和通知advice的结合。即，它是一个类。</li>
-<li>连接点（JointPoint）：与切入点匹配的执行点，指那些可能被拦截到的⽅法。</li>
-<li>切入点（PointCut）：切面通知 执行的 “地点”的定义。例如：addUser()。</li>
-<li>通知（Advice）：切面必须要完成的工作。即，它是类中的一个方法。例如：before，after。</li>
-<li>目标（Target）：目标类，被通知对象。例如：UserService</li>
-<li>代理（Proxy）：向目标对象应用通知之后创建的对象。</li>
-<li>织⼊（Weaving）：是指把增强advice应⽤到⽬标对象target，来创建新的代理对象proxy的过程。</li>
-</ul>
-<h2 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h2><p>事务就是把一系列的动作当成一个独立的工作单元，这些动作要么全部完成，要么全部不起作用。</p>
-<h3 id="事务四大基本特性"><a href="#事务四大基本特性" class="headerlink" title="事务四大基本特性"></a>事务四大基本特性</h3><ol>
-<li><p>原子性（atomicity）</p>
-<ul>
-<li>事务是原子性操作，由一系列动作组成，事务的原子性确保动作要么全部完成，要么完全不起作用。</li>
-</ul>
-</li>
-<li><p>一致性（consistency）</p>
-<ul>
-<li>一旦所有事务动作完成，事务就要被提交。数据和资源处于一种满足业务规则的一致性状态中。</li>
-</ul>
-</li>
-<li><p>隔离性（isolation）</p>
-<ul>
-<li>可能多个事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。</li>
-</ul>
-</li>
-<li><p>持久性（durability）</p>
-<ul>
-<li>事务一旦完成，无论系统发生什么错误，结果都不会受到影响。通常情况下，事务的结果被写到持久化存储器中。</li>
-</ul>
-</li>
-</ol>
+              <h2 id="Component-template-should-contain-exactly-one-root-element-If-you-are-using-v-if-on-multiple-elements-use-v-else-if-to-chain-them-instead"><a href="#Component-template-should-contain-exactly-one-root-element-If-you-are-using-v-if-on-multiple-elements-use-v-else-if-to-chain-them-instead" class="headerlink" title="Component template should contain exactly one root element. If you are using v-if on multiple elements, use v-else-if to chain them instead"></a>Component template should contain exactly one root element. If you are using v-if on multiple elements, use v-else-if to chain them instead</h2><p>vue模板<code>&lt;template&gt;</code>只能有一个根对象，使用一个<code>&lt;div&gt;</code>包裹所有元素即可解决</p>
+<h2 id="在Centos8系统编译Mysql5-7-27时-出现依赖包不全的情况报错"><a href="#在Centos8系统编译Mysql5-7-27时-出现依赖包不全的情况报错" class="headerlink" title="在Centos8系统编译Mysql5.7.27时,出现依赖包不全的情况报错"></a>在Centos8系统编译Mysql5.7.27时,出现依赖包不全的情况报错</h2><p>安装所需依赖包，并重新预编译。重新预编译前，需要删除”CMakeCache.txt”文件</p>
+<h3 id="Package-‘libtirpc‘-required-by-‘virtual-world‘-not-found"><a href="#Package-‘libtirpc‘-required-by-‘virtual-world‘-not-found" class="headerlink" title="Package ‘libtirpc‘, required by ‘virtual:world‘, not found"></a>Package ‘libtirpc‘, required by ‘virtual:world‘, not found</h3><p>报错内容：</p>
+<pre><code class="hljs groovy">-- Checking <span class="hljs-keyword">for</span> module ‘libtirpc‘
+--   Package ‘libtirpc‘, required by ‘<span class="hljs-string">virtual:</span>world‘, not found
+CMake Error at cmake/rpc.<span class="hljs-string">cmake:</span><span class="hljs-number">65</span> (MESSAGE):
+  Could not find rpc<span class="hljs-regexp">/rpc.h in /</span>usr<span class="hljs-regexp">/include or /</span>usr<span class="hljs-regexp">/include/</span>tirpc
+Call Stack (most recent call first):
+  plugin<span class="hljs-regexp">/group_replication/</span>libmysqlgcs/configure.<span class="hljs-string">cmake:</span><span class="hljs-number">57</span> (MYSQL_CHECK_RPC)
+  plugin<span class="hljs-regexp">/group_replication/</span>libmysqlgcs/CMakeLists.<span class="hljs-string">txt:</span><span class="hljs-number">28</span> (INCLUDE)</code></pre>
+
+<p>解决方法：</p>
+<pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> -y libtirpc-devel</code></pre>
+
+<h3 id="Could-not-find-rpcgen"><a href="#Could-not-find-rpcgen" class="headerlink" title="Could not find rpcgen"></a>Could not find rpcgen</h3><p>报错内容：</p>
+<pre><code class="hljs less"><span class="hljs-selector-tag">CMake</span> <span class="hljs-selector-tag">Error</span> <span class="hljs-selector-tag">at</span> <span class="hljs-selector-tag">rapid</span>/<span class="hljs-selector-tag">plugin</span>/<span class="hljs-selector-tag">group_replication</span>/<span class="hljs-selector-tag">rpcgen</span><span class="hljs-selector-class">.cmake</span><span class="hljs-selector-pseudo">:93</span> (MESSAGE):
+  <span class="hljs-selector-tag">Could</span> <span class="hljs-selector-tag">not</span> <span class="hljs-selector-tag">find</span> <span class="hljs-selector-tag">rpcgen</span>
+<span class="hljs-selector-tag">Call</span> <span class="hljs-selector-tag">Stack</span> (most recent call first):
+  <span class="hljs-selector-tag">rapid</span>/<span class="hljs-selector-tag">plugin</span>/<span class="hljs-selector-tag">group_replication</span>/<span class="hljs-selector-tag">CMakeLists</span><span class="hljs-selector-class">.txt</span><span class="hljs-selector-pseudo">:29</span> (INCLUDE)</code></pre>
+
+<p>解决方法：</p>
+<pre><code class="hljs vim">wget http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/thkukuk/rpcsvc-proto/releases/download/v1.<span class="hljs-number">4</span>/rpcsvc-proto-<span class="hljs-number">1.4</span>.tar.gz
+tar xf rpcsvc-proto-<span class="hljs-number">1.4</span>.tar.gz
+<span class="hljs-keyword">cd</span> rpcsvc-proto-<span class="hljs-number">1.4</span>
+./configure
+<span class="hljs-keyword">make</span>
+<span class="hljs-keyword">make</span> install</code></pre>
+
+<h2 id="Spring-Boot-设置拦截器，报空指针异常"><a href="#Spring-Boot-设置拦截器，报空指针异常" class="headerlink" title="Spring Boot 设置拦截器，报空指针异常"></a>Spring Boot 设置拦截器，报空指针异常</h2><p>报错内容：在登录拦截器中，redisPool报了空指针异常</p>
+<pre><code class="hljs yaml"><span class="hljs-attr">java.lang.NullPointerException:</span> <span class="hljs-literal">null</span></code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">// 错误的方法</span>
+<span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;
+    <span class="hljs-comment">// 增加登录拦截器</span>
+    registry.addInterceptor(<span class="hljs-keyword">new</span> LoginHandlerInterceptor()).addPathPatterns(<span class="hljs-string">"/obs/**"</span>);
+&#125;</code></pre>
+
+<p>分析：在配置登录拦截器时，使用了new 对象的方法，正确方式应该是使用Spring的依赖注入，让Spring容器帮我去new一个登录拦截器对象，并检查所需的依赖，自动装配。</p>
+<p>解决方法：</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Autowired</span>
+LoginHandlerInterceptor loginHandlerInterceptor;
+<span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addInterceptors</span><span class="hljs-params">(InterceptorRegistry registry)</span> </span>&#123;
+    <span class="hljs-comment">// 增加登录拦截器</span>
+    registry.addInterceptor(loginHandlerInterceptor).addPathPatterns(<span class="hljs-string">"/obs/**"</span>);
+&#125;</code></pre>
+
 
             </article>
             <hr>
@@ -271,7 +265,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+                      <a class="hover-with-bg" href="/categories/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/">日常记录</a>
                     
                   </div>
                 
@@ -279,7 +273,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                      <a class="hover-with-bg" href="/tags/%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">踩坑记录</a>
                     
                   </div>
                 
@@ -292,9 +286,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/10/Spring-Boot-YAML/">
+                      <a href="/2020/09/02/%E5%88%9D%E8%AF%86Redis/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot:YAML配置文件 </span>
+                        <span class="hidden-mobile">初识Redis</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -302,8 +296,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/29/%E6%8C%81%E7%BB%AD%E8%AE%B0%E5%BD%95%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/">
-                        <span class="hidden-mobile">记录使用Hexo的一些坑</span>
+                      <a href="/2020/08/13/Vue%E8%B7%AF%E7%94%B1/">
+                        <span class="hidden-mobile">Vue路由</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -490,7 +484,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "浅谈Spring&nbsp;",
+        "2020-08 踩坑记录&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

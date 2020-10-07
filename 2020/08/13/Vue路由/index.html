@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="拉特">
+  <meta name="keywords" content="">
+  <title>Vue路由 - Hang in there</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1969536_ei11cr74rl.css">
+
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ljtian's blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-13 17:32">
+      2020年8月13日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="Vue-Router"><a href="#Vue-Router" class="headerlink" title="Vue Router"></a>Vue Router</h2><p>Vue Router是Vue.js官方的<strong>路由管理器</strong>（路径跳转）。它和Vue.js的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有:</p>
+<ol>
+<li>嵌套的路由/视图表</li>
+<li>模块化的、基于组件的路由配置</li>
+<li>路由参数、查询、通配符</li>
+<li>基于Vue.js过渡系统的视图过渡效果</li>
+<li>细粒度的导航控制</li>
+<li>带有自动激活的CSS class的链接</li>
+<li>HTML5历史模式或hash模式，在IE9中自动降级</li>
+<li>自定义的滚动条行为</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="hljs q">npm install vue-router --<span class="hljs-built_in">save</span>-<span class="hljs-built_in">dev</span></code></pre>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>index.html调用main.js，再调用App.vue</p>
+<p>index.html</p>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Vue<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>main.js</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./App'</span>
+
+<span class="hljs-comment">// 自动扫描路由配置</span>
+<span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">'./router'</span>
+
+Vue.config.productionTip = <span class="hljs-literal">false</span>
+
+<span class="hljs-comment">/* eslint-disable no-new */</span>
+<span class="hljs-keyword">new</span> Vue(&#123;
+  el: <span class="hljs-string">'#app'</span>,
+  <span class="hljs-comment">// 配置路由</span>
+  router,
+  components: &#123; App &#125;,
+  template: <span class="hljs-string">'&lt;App/&gt;'</span>
+&#125;)</code></pre>
+
+<p>App.vue</p>
+<ul>
+<li>使用<code>&lt;router-link&gt;</code>组件来导航，传入<code>to</code>属性指定链接，<code>&lt;router-link&gt;</code>默认渲染成一个<code>&lt;a&gt;</code>标签</li>
+<li><code>&lt;router-view&gt;</code>是路由出口，路由匹配到的组件渲染到此处</li>
+</ul>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div id&#x3D;&quot;app&quot;&gt;
+    &lt;h1&gt;使用Vue Router&lt;&#x2F;h1&gt;
+    &lt;router-link to&#x3D;&quot;&#x2F;test&quot;&gt;Test&lt;&#x2F;router-link&gt;
+    &lt;router-link to&#x3D;&quot;&#x2F;main&quot;&gt;Main&lt;&#x2F;router-link&gt;
+    &lt;router-link to&#x3D;&quot;&#x2F;foo&quot;&gt;Foo&lt;&#x2F;router-link&gt;
+    &lt;router-view&gt;&lt;&#x2F;router-view&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+
+export default &#123;
+  name: &#39;App&#39;,
+&#125;
+&lt;&#x2F;script&gt;
+
+&lt;style&gt;
+#app &#123;
+  font-family: &#39;Avenir&#39;, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+&#125;
+&lt;&#x2F;style&gt;</code></pre>
+
+<p>路由配置 index.js (默认路由配置文件名)</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 导入Vue和VueRouter</span>
+<span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
+<span class="hljs-keyword">import</span> VueRouter <span class="hljs-keyword">from</span> <span class="hljs-string">"vue-router"</span>;
+<span class="hljs-comment">// 导入组件</span>
+<span class="hljs-keyword">import</span> Test <span class="hljs-keyword">from</span> <span class="hljs-string">"../components/Test"</span>;
+<span class="hljs-keyword">import</span> Main <span class="hljs-keyword">from</span> <span class="hljs-string">"../components/Main"</span>;
+<span class="hljs-keyword">import</span> Foo <span class="hljs-keyword">from</span> <span class="hljs-string">"../components/Foo"</span>;
+<span class="hljs-comment">// 安装路由</span>
+Vue.use(VueRouter)
+
+<span class="hljs-comment">// 配置导出路由</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> VueRouter(&#123;
+  routes:[
+    <span class="hljs-comment">// Test 组件</span>
+    &#123;
+      <span class="hljs-comment">// 路由的路径</span>
+      path: <span class="hljs-string">'/test'</span>,
+      name: <span class="hljs-string">'content'</span>,
+      <span class="hljs-comment">// 跳转的组件</span>
+      component: Test
+    &#125;,
+    &#123;
+      <span class="hljs-comment">// 路由的路径</span>
+      path: <span class="hljs-string">'/main'</span>,
+      name: <span class="hljs-string">'content'</span>,
+      <span class="hljs-comment">// 跳转的组件</span>
+      component: Main
+    &#125;,
+    &#123;
+      <span class="hljs-comment">// 路由的路径</span>
+      path: <span class="hljs-string">'/foo'</span>,
+      <span class="hljs-comment">// name: 'content',</span>
+      <span class="hljs-comment">// 跳转的组件</span>
+      component: Foo
+    &#125;,
+  ]
+&#125;)</code></pre>
+
+<p>Test.vue中使用路由</p>
+<pre><code class="hljs vue">&lt;template&gt;
+    &lt;div&gt;&lt;h1&gt;This is Test&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+    export default &#123;
+        name: &quot;Test&quot;
+    &#125;
+&lt;&#x2F;script&gt;
+
+&lt;style scoped&gt;
+
+&lt;&#x2F;style&gt;</code></pre>
+
+<p>启动测试</p>
+<pre><code class="hljs dockerfile">npm <span class="hljs-keyword">run</span><span class="bash"> dev</span></code></pre>
+
+<h2 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h2><p>嵌套路由又称子路由，在实际应用中，通常由多层嵌套的组件组合而成。同样地，URL 中各段动态路径也按某种结构对应嵌套的各层组件，例如：</p>
+<pre><code class="hljs routeros">/user/foo<span class="hljs-built_in">/profile </span>                    /user/foo/posts
++------------------+                  +-----------------+
+|<span class="hljs-built_in"> User </span>            |                  |<span class="hljs-built_in"> User </span>           |
+| +--------------+ |                  | +-------------+ |
+| |<span class="hljs-built_in"> Profile </span>     | |  +------------&gt;  | | Lists       | |
+| |              | |                  | |             | |
+| +--------------+ |                  | +-------------+ |
++------------------+                  +-----------------+</code></pre>
+
+<p>在<code>VueRouter</code>参数中使用<code>children</code>配置嵌套路由</p>
+<pre><code class="hljs js">routes:[
+    &#123;
+      path: <span class="hljs-string">'/main'</span>,
+      component: Main,
+      <span class="hljs-comment">// 导入子模块</span>
+      children:[
+        &#123;
+          path: <span class="hljs-string">'/user/profile'</span>,
+          component: UserProfile,
+        &#125;,&#123;
+          path: <span class="hljs-string">'/user/list'</span>,
+          component: UserList,
+        &#125;
+      ]
+    &#125;
+]</code></pre>
+
+<h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><p>当请求时，需要传递参数</p>
+<ul>
+<li><p>第一种取值方式，使用<code>$route.params</code></p>
+<ol>
+<li><p>修改路由配置<code>index.js</code></p>
+<pre><code class="hljs js">&#123;
+    path: <span class="hljs-string">'/user/profile/:id'</span>,
+    name: <span class="hljs-string">'UserProfile'</span>,
+    component: UserProfile,
+&#125;</code></pre>
+</li>
+<li><p>在<code>&lt;route-link&gt;</code>处改成<code>:to</code>，将这一属性当作对象来使用，<code>&lt;route-link&gt;</code>中的<code>name</code>要与路由配置中的<code>name</code>匹配</p>
+<pre><code class="hljs vue">&lt;router-link :to&#x3D;&quot;&#123;name:&#39;UserProfile&#39;,params:&#123;id:1&#125;&#125;&quot;&gt;个人信息&lt;&#x2F;router-link&gt;</code></pre>
+</li>
+<li><p>在展示的组件<code>Profile.vue</code>中接收参数</p>
+<pre><code class="hljs vue">&#123;&#123;$route.params.id&#125;&#125;</code></pre>
+</li>
+</ol>
+</li>
+<li><p>第二种取值方式，使用<code>props</code>减少耦合</p>
+<ol>
+<li><p>路由配置<code>index.js</code>中增加<code>props: true</code>属性</p>
+<pre><code class="hljs js">&#123;
+    path: <span class="hljs-string">'/user/profile/:id'</span>,
+    name: <span class="hljs-string">'UserProfile'</span>,
+    component: UserProfile,
+    props: <span class="hljs-literal">true</span>
+&#125;</code></pre>
+</li>
+<li><p>在展示的组件<code>Profile.vue</code>中接收参数，增加<code>props</code>参数</p>
+<pre><code class="hljs vue">&lt;template&gt;
+  &lt;div&gt;
+    &lt;h1&gt;个人信息&lt;&#x2F;h1&gt;
+    &#123;&#123;id&#125;&#125;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script&gt;
+  export default &#123;
+    props: [&#39;id&#39;],
+    name: &quot;UserProfile&quot;
+  &#125;
+&lt;&#x2F;script&gt;</code></pre>
+
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="重定向和别名"><a href="#重定向和别名" class="headerlink" title="重定向和别名"></a>重定向和别名</h2><p>重定向也是通过 <code>routes</code>路由 配置来完成</p>
+<ul>
+<li><p>从<code>/goHome</code>到<code>/main</code></p>
+<pre><code class="hljs js">&#123;
+    path: <span class="hljs-string">'/goHome'</span>,
+	redirect: <span class="hljs-string">'/main'</span>
+&#125;</code></pre>
+</li>
+<li><p>重定向的目标也可以是一个有命名的路由</p>
+<pre><code class="hljs js">&#123;
+	path: <span class="hljs-string">'/goHome'</span>,
+	redirect: &#123;<span class="hljs-attr">name</span>: <span class="hljs-string">'main'</span>&#125;
+&#125;</code></pre>
+
+</li>
+</ul>
+<p>重定向指的是：访问<code>/goHome</code>，url替换成<code>/main</code>，路由匹配的是<code>/main</code></p>
+<p>别名指的是：<code>/main</code>的别名是<code>/goHome</code>，访问<code>/goHome</code>时，url保持<code>/goHome</code>，但路由匹配的是<code>/main</code>，就像直接访问<code>/main</code>一样</p>
+<pre><code class="hljs js">&#123;
+	path: <span class="hljs-string">'/main'</span>,
+	name: <span class="hljs-string">'main'</span>,
+    component: Main,
+    alias: <span class="hljs-string">'/goHome'</span>,
+&#125;</code></pre>
+
+<h2 id="路由模式"><a href="#路由模式" class="headerlink" title="路由模式"></a>路由模式</h2><ul>
+<li>hash：路径带 # 符号（默认），如 <a href="http://localhost/#/login" target="_blank" rel="noopener">http://localhost/#/login</a> </li>
+<li>history：路径不带 # 符号，如 <a href="http://localhost/login" target="_blank" rel="noopener">http://localhost/login</a></li>
+</ul>
+<pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> VueRouter(&#123;
+    mode: <span class="hljs-string">'history'</span>,
+    routes: [
+    ]
+&#125;);</code></pre>
+
+<h2 id="404"><a href="#404" class="headerlink" title="404"></a>404</h2><p>使用通配符<code>*</code>，并放在路由配置的最后</p>
+<pre><code class="hljs js">&#123;
+    path: <span class="hljs-string">'*'</span>,
+    component: NotFound
+&#125;</code></pre>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue%EF%BC%8C%E5%89%8D%E7%AB%AF/">Vue，前端</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/26/2020-08%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2020-08 踩坑记录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/11/Vue%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+                        <span class="hidden-mobile">Vue基础语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <span>Powered by</span>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <span>Theme by</span>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">粤ICP备20069462号</a>
+    
+      <a
+        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44190002004892"
+        rel="nofollow noopener"
+        class="beian-police"
+        target="_blank"
+      >
+        <span class="beian-police-sep">&nbsp;|&nbsp;</span>
+        
+          <img src="/img/police_beian.png" srcset="/img/loading.gif" alt="police-icon" />
+        
+        <span>粤公网安备 44190002004892号</span>
+      </a>
+     
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Vue路由&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

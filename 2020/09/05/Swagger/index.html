@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="拉特">
   <meta name="keywords" content="">
-  <title>浅谈Spring - Hang in there</title>
+  <title>快速认识Swagger - Hang in there</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -156,8 +156,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-08-01 17:43">
-      2020年8月1日 下午
+    <time datetime="2020-09-05 17:33">
+      2020年9月5日 下午
     </time>
   </div>
 
@@ -167,7 +167,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      873 字
     </span>
   
 
@@ -177,7 +177,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分钟
     </span>
   
@@ -208,60 +208,143 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="什么是Spring"><a href="#什么是Spring" class="headerlink" title="什么是Spring"></a>什么是Spring</h2><p>Spring 是一个轻量级Java开发开源框架，是为了解决企业级应用开发的复杂性而创建的，简化开发过程。Spring是⼀个轻量级的控制反转（IoC）和⾯向切⾯（AOP）的容器框架。</p>
-<h2 id="Spring体系结构"><a href="#Spring体系结构" class="headerlink" title="Spring体系结构"></a>Spring体系结构</h2><p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809173931.png" srcset="/img/loading.gif" alt></p>
-<h2 id="IOC和DI"><a href="#IOC和DI" class="headerlink" title="IOC和DI"></a>IOC和DI</h2><h3 id="IOC：控制反转"><a href="#IOC：控制反转" class="headerlink" title="IOC：控制反转"></a>IOC：控制反转</h3><p>控制反转即控制权的转移，是Spring框架的核心，用来消减程序的耦合问题。</p>
-<p>在传统开发模式下，调用者通过“new 被调用者”的方式创建对象。这种方式增加调用者和被调用者之间的耦合性，不利于后期维护。</p>
-<p>使用Spring后，对象的创建由Spring容器完成，Spring容器负责控制程序间的关系，使得控制权由调用者转移到Spring容器，控制器发生了反转。</p>
-<p>举例加深理解：我想吃面包。当某个Java对象（调用者：我），调用另一个Java对象（被调用者：面包）时，在传统编程模式下：使用new方法（自己制作面包）；使用Spring：对象的实例（面包）由Spring容器（面包店）创建，Spring容器负责控制程序间的关系（面包店负责我与面包之间的关系）。</p>
-<h3 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h3><p>Spring容器中，管理一系列的类，但调用者需要调用时，Spring容器负责将依赖对象赋值给调用者的成员变量，为调用者注入所依赖的实例。</p>
-<p>举例：面包店给我需要的菠萝包。</p>
-<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174012.png" srcset="/img/loading.gif" alt></p>
-<p>综上所述，控制反转是一种通过描述（XML或者注解）并通过第三方产生或获取特定对象的方式。在Spring中，实现控制反转的是IOC容器，实现方法是DI（构造方法注入、setter方法注入、接口注入）。</p>
-<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><h3 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h3><ol>
-<li>AOP即面向切面编程，通过预编译方式和运行期动态代理实现程序功能的统一维护的一种技术。</li>
-<li>AOP是OOP（⾯向对象编程）的延续，是软件开发中的⼀个热点，也是Spring框架中的⼀个重要内<br>容，是函数式编程的⼀种衍⽣范型。</li>
-<li>利⽤AOP可以对业务逻辑的各个部分进⾏隔离，从⽽使得业务逻辑各部分之间的耦合度降低，提⾼程<br>序的可重⽤性，同时提⾼了开发的效率。</li>
-<li>AOP采取横向抽取机制，取代了传统纵向继承体系重复性代码。</li>
-<li>作用：在程序运行期间，不修改源码对已有方法进行增强；</li>
-<li>应用：事务管理、性能监视、安全检查、缓存、⽇志等。</li>
-</ol>
-<p>将公共的业务 (日志 , 安全等) 和领域业务结合起来 , 当执行领域业务时 , 将会把公共业务加进来 。实现公共业务的重复利用，领域业务更纯粹 ，其本质还是动态代理。</p>
-<h3 id="AOP在Spring中的作用"><a href="#AOP在Spring中的作用" class="headerlink" title="AOP在Spring中的作用"></a>AOP在Spring中的作用</h3><p>提供声明式事务；允许用户自定义切面</p>
-<p><img src="https://gitee.com/jiantian99/Images-Hosting/raw/master/img/20200809174228.png" srcset="/img/loading.gif" alt></p>
-<p>常用术语：</p>
-<ul>
-<li>切面（ASPECT）：横切关注点被模块化的特殊对象，是切⼊点pointcut和通知advice的结合。即，它是一个类。</li>
-<li>连接点（JointPoint）：与切入点匹配的执行点，指那些可能被拦截到的⽅法。</li>
-<li>切入点（PointCut）：切面通知 执行的 “地点”的定义。例如：addUser()。</li>
-<li>通知（Advice）：切面必须要完成的工作。即，它是类中的一个方法。例如：before，after。</li>
-<li>目标（Target）：目标类，被通知对象。例如：UserService</li>
-<li>代理（Proxy）：向目标对象应用通知之后创建的对象。</li>
-<li>织⼊（Weaving）：是指把增强advice应⽤到⽬标对象target，来创建新的代理对象proxy的过程。</li>
+              <h2 id="Swagger简介"><a href="#Swagger简介" class="headerlink" title="Swagger简介"></a>Swagger简介</h2><ul>
+<li>号称世界上最流行的API框架</li>
+<li>Restful Api 文档在线自动生成器 =&gt; <strong>API 文档 与API 定义同步更新</strong></li>
+<li>直接运行，在线测试API</li>
+<li>支持多种语言 （如：Java，PHP等）</li>
+<li>官网：<a href="https://swagger.io/" target="_blank" rel="noopener">https://swagger.io/</a></li>
 </ul>
-<h2 id="Spring事务"><a href="#Spring事务" class="headerlink" title="Spring事务"></a>Spring事务</h2><p>事务就是把一系列的动作当成一个独立的工作单元，这些动作要么全部完成，要么全部不起作用。</p>
-<h3 id="事务四大基本特性"><a href="#事务四大基本特性" class="headerlink" title="事务四大基本特性"></a>事务四大基本特性</h3><ol>
-<li><p>原子性（atomicity）</p>
-<ul>
-<li>事务是原子性操作，由一系列动作组成，事务的原子性确保动作要么全部完成，要么完全不起作用。</li>
-</ul>
+<h2 id="Spring-Boot使用Swagger"><a href="#Spring-Boot使用Swagger" class="headerlink" title="Spring Boot使用Swagger"></a>Spring Boot使用Swagger</h2><p>要求：jdk1.8+</p>
+<ol>
+<li><p>导入Maven依赖：</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.springfox<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>springfox-swagger2<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.9.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.springfox<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.9.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
 </li>
-<li><p>一致性（consistency）</p>
-<ul>
-<li>一旦所有事务动作完成，事务就要被提交。数据和资源处于一种满足业务规则的一致性状态中。</li>
-</ul>
+<li><p>编写一个Controller，以供测试使用</p>
 </li>
-<li><p>隔离性（isolation）</p>
-<ul>
-<li>可能多个事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。</li>
-</ul>
+<li><p>编写swagger配置类 <code>SwaggerConfig</code></p>
+<pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>   <span class="hljs-comment">// 配置类</span>
+<span class="hljs-meta">@EnableSwagger</span>2  <span class="hljs-comment">// 开启Swagger2自动配置</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SwaggerConfig</span> </span>&#123;
+
+&#125;</code></pre>
 </li>
-<li><p>持久性（durability）</p>
-<ul>
-<li>事务一旦完成，无论系统发生什么错误，结果都不会受到影响。通常情况下，事务的结果被写到持久化存储器中。</li>
-</ul>
+<li><p>访问<code>http://localhost:8080/swagger-ui.html</code>，查看到swagger的界面</p>
 </li>
 </ol>
+<h2 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h2><ol>
+<li><p>Swagger实例Bean是Docket，所以通过配置Docket实例来配置Swaggger</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-comment">// 关联上apiInfo</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo());
+&#125;</code></pre>
+</li>
+<li><p>通过<code>apiInfo</code>属性配置文档信息</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 配置Swagger信息</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> ApiInfo <span class="hljs-title">apiInfo</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-comment">// 填入联系人名称","联系人访问链接","联系人邮箱</span>
+    Contact contact=<span class="hljs-keyword">new</span> Contact(<span class="hljs-string">"Contact-name"</span>,<span class="hljs-string">"http://www."</span>,<span class="hljs-string">"contact@email.com"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ApiInfo(
+        <span class="hljs-string">"我的Swagger API文档"</span>,          <span class="hljs-comment">// 标题</span>
+        <span class="hljs-string">"学习使用Swagger"</span>,              <span class="hljs-comment">// 描述</span>
+        <span class="hljs-string">"v1.0"</span>,                        <span class="hljs-comment">// 版本号</span>
+        <span class="hljs-string">"https://www."</span>,                <span class="hljs-comment">// 组织链接</span>
+        contact,                       <span class="hljs-comment">// 联系人信息 </span>
+        <span class="hljs-string">"Apacch 2.0 许可"</span>,             <span class="hljs-comment">// 许可</span>
+        <span class="hljs-string">"http://www.apache.org/licenses/LICENSE-2.0"</span>,      <span class="hljs-comment">// 许可链接</span>
+        <span class="hljs-keyword">new</span> ArrayList&lt;&gt;()             <span class="hljs-comment">// 扩展</span>
+    );
+&#125;</code></pre>
+
+</li>
+</ol>
+<h2 id="配置扫描接口"><a href="#配置扫描接口" class="headerlink" title="配置扫描接口"></a>配置扫描接口</h2><p>构建Docket时通过<code>select()</code>方法配置怎么扫描接口</p>
+<p>通过<code>select()</code>方法，配置扫描接口<code>RequestHandlerSelectors</code>配置如何扫描接口</p>
+<p>扫描方式：</p>
+<ol>
+<li><code>any()</code>   扫描所有接口</li>
+<li><code>none()</code>  不扫描接口</li>
+<li><code>withMethodAnnotation(final Class&lt;? extends Annotation&gt; annotation)</code> 扫描方法上的注解,如<code>withMethodAnnotation(GetMapping.class)</code>只扫描get请求</li>
+<li><code>withClassAnnotation(final Class&lt;? extends Annotation&gt; annotation)</code> 扫描类上的注解,如<code>withClassAnnotation(Controller.class)</code>只扫描有controller注解的类中的接口</li>
+<li><code>basePackage(final String basePackage)</code> 根据包的路径扫描接口</li>
+</ol>
+<p>使用</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 配置Docket以配置Swagger具体参数</span>
+<span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo())
+        .select()
+        <span class="hljs-comment">//.apis(RequestHandlerSelectors.any())    // 扫描所有接口</span>
+        <span class="hljs-comment">//.apis(RequestHandlerSelectors.none())   // 不扫描所有接口</span>
+        <span class="hljs-comment">//.apis(RequestHandlerSelectors.withMethodAnnotation(GetMapping.class))        // 扫描方法上有GetMapping的接口</span>
+        <span class="hljs-comment">//.apis(RequestHandlerSelectors.withClassAnnotation(Controller.class))         // 扫描类上有Controller的接口</span>
+        .apis(RequestHandlerSelectors.basePackage(<span class="hljs-string">"com.example.swagger.controller"</span>))   <span class="hljs-comment">// 扫描指定包路径下的接口</span>
+        .build();
+&#125;</code></pre>
+
+<h3 id="配置接口扫描过滤"><a href="#配置接口扫描过滤" class="headerlink" title="配置接口扫描过滤"></a>配置接口扫描过滤</h3><pre><code class="hljs java"><span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket</span><span class="hljs-params">()</span> </span>&#123;
+   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2)
+      .apiInfo(apiInfo())
+      .select()
+      .apis(RequestHandlerSelectors.basePackage(<span class="hljs-string">"com.example.swagger.controller"</span>))
+       <span class="hljs-comment">// 配置如何通过path过滤,即这里只扫描请求以/test开头的接口</span>
+      .paths(PathSelectors.ant(<span class="hljs-string">"/test/**"</span>))
+      .build();
+&#125;</code></pre>
+
+<p>通过<code>.path(PathSelectors.)</code>配置接口扫描过滤</p>
+<p>可选值有</p>
+<ol>
+<li><code>any()</code>  任何请求都扫描</li>
+<li><code>none()</code> 任何请求都不扫描</li>
+<li><code>regex()</code> 通过正则表达式控制</li>
+<li><code>ant()</code> 通过字符串控制,如<code>&quot;/test/**&quot;</code></li>
+</ol>
+<h2 id="配置Swagger开关"><a href="#配置Swagger开关" class="headerlink" title="配置Swagger开关"></a>配置Swagger开关</h2><p>通过<code>enable()</code>方法配置是否启用swagger,默认为true,如果是false,则不能在浏览器中访问</p>
+<h2 id="配置Swagger分组"><a href="#配置Swagger分组" class="headerlink" title="配置Swagger分组"></a>配置Swagger分组</h2><p>使用<code>.groupName()</code>,配置分组,参数为分组名,默认为 default</p>
+<p>配置多个分组</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket1</span><span class="hljs-params">()</span></span>&#123;
+   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">"group1"</span>);
+&#125;
+<span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket2</span><span class="hljs-params">()</span></span>&#123;
+   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">"group2"</span>);
+&#125;
+<span class="hljs-meta">@Bean</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket3</span><span class="hljs-params">()</span></span>&#123;
+   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.SWAGGER_2).groupName(<span class="hljs-string">"group3"</span>);
+&#125;</code></pre>
+
+<h2 id="常用注解"><a href="#常用注解" class="headerlink" title="常用注解"></a>常用注解</h2><ul>
+<li><p><code>@Api(tag = &quot;xxx模块说明&quot;)</code></p>
+<p>作用在模块类上</p>
+</li>
+<li><p><code>ApiOperation(&quot;xx接口说明&quot;)</code></p>
+<p>作用在接口方法上</p>
+</li>
+<li><p><code>ApiModel(&quot;xxPojo说明&quot;)</code></p>
+<p>作用在模型类上，如VO、BO</p>
+</li>
+<li><p><code>ApiModelProperty(value = &quot;xx属性说明&quot;,hidden = true)</code></p>
+<p>作用在类方法和属性上，hidden为true时，隐藏该属性</p>
+</li>
+<li><p><code>ApiParm(&quot;xx参数说明&quot;)</code></p>
+<p>作用在参数、方法和字段上</p>
+</li>
+</ul>
 
             </article>
             <hr>
@@ -271,7 +354,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
                     
                   </div>
                 
@@ -279,7 +362,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                      <a class="hover-with-bg" href="/tags/Swagger%EF%BC%8C%E5%89%8D%E5%90%8E%E7%AB%AF/">Swagger，前后端</a>
                     
                   </div>
                 
@@ -292,18 +375,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/10/Spring-Boot-YAML/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring Boot:YAML配置文件 </span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/29/%E6%8C%81%E7%BB%AD%E8%AE%B0%E5%BD%95%E4%BD%BF%E7%94%A8Hexo%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/">
-                        <span class="hidden-mobile">记录使用Hexo的一些坑</span>
+                      <a href="/2020/09/02/%E5%88%9D%E8%AF%86Redis/">
+                        <span class="hidden-mobile">初识Redis</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -490,7 +567,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "浅谈Spring&nbsp;",
+        "快速认识Swagger&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
